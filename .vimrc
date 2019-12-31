@@ -121,5 +121,14 @@ autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | wincmd p | ene | exe 'NERDTree' argv()[0] | endif
 
+" Close NERDTree if only one window is left open
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 " Change highlight on NERDTree to red/white
 hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white
+
+" Change color of tab bar
+:hi TabLineFill ctermbg=11
+:hi TabLine ctermfg=6 ctermbg=11
+:hi Title ctermfg=4
+:hi TabLineSel ctermfg=4 ctermbg=0
