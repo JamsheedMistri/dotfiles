@@ -135,13 +135,6 @@ set lazyredraw
 " If this many ms goes by and nothing is typed, the file will be saved to swap
 set updatetime=500
 
-" Automatically start NERDTree when starting Vim
-" autocmd vimenter * NERDTree
-
-" Allow opening of directories using the Vim command line command
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | wincmd p | ene | exe 'NERDTree' argv()[0] | endif
-
 " Close NERDTree if only one window is left open
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
