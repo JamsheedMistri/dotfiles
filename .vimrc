@@ -82,10 +82,14 @@ nnoremap <C-t> <Esc>:FZF<CR>
 nnoremap <C-\> <Esc>:NERDTreeToggle<CR>
 
 " Switch between different windows by their direction
-no <C-j> <C-w>j| "switching to below window 
-no <C-k> <C-w>k| "switching to above window
-no <C-l> <C-w>l| "switching to right window 
-no <C-h> <C-w>h| "switching to left window
+no <C-j> <C-w>j
+no <C-k> <C-w>k
+no <C-l> <C-w>l
+no <C-h> <C-w>h
+
+" Change splits to be more intuitive (Ctrl-w - and Ctrl-w |)
+no <C-w>- <C-w>n
+no <C-w>\| :vnew<CR>
 
 " Always try to show a paragraph’s last line
 set display+=lastline
