@@ -41,14 +41,16 @@ let s:cterm0C = "06"
 let s:cterm0D = "04"
 let s:cterm0E = "05"
 if exists('base16colorspace') && base16colorspace == "256"
-  let s:cterm01 = "18"
+  " changed from 18 to 11
+  let s:cterm01 = "11"
   let s:cterm02 = "19"
   let s:cterm04 = "20"
   let s:cterm06 = "21"
   let s:cterm09 = "16"
   let s:cterm0F = "17"
 else
-  let s:cterm01 = "10"
+  " changed from 10 to 11
+  let s:cterm01 = "11"
   let s:cterm02 = "11"
   let s:cterm04 = "12"
   let s:cterm06 = "13"
@@ -162,10 +164,7 @@ call <sid>hi("Conceal",       s:gui0D, s:gui00, s:cterm0D, s:cterm00, "")
 call <sid>hi("Cursor",        s:gui00, s:gui05, s:cterm00, s:cterm05, "")
 call <sid>hi("NonText",       s:gui03, "", s:cterm03, "", "")
 call <sid>hi("Normal",        s:gui05, s:gui00, s:cterm05, s:cterm00, "")
-
-" Line numbers were an ugly green color background before. Changed last argument to cterm00
 call <sid>hi("LineNr",        s:gui03, s:gui01, s:cterm03, s:cterm00, "")
-
 call <sid>hi("SignColumn",    s:gui03, s:gui01, s:cterm03, s:cterm01, "")
 call <sid>hi("SpecialKey",    s:gui03, "", s:cterm03, "", "")
 call <sid>hi("StatusLine",    s:gui04, s:gui02, s:cterm04, s:cterm02, "none")

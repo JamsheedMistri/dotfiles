@@ -1,3 +1,22 @@
+" Plugins will be downloaded under the specified directory.
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'pangloss/vim-javascript'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'vim-scripts/bbcode'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
 " Syntax highlighting
 syntax on
 set background=dark
@@ -18,8 +37,9 @@ set shiftround
 " When shifting, indent using four spaces.
 set shiftwidth=4
 
-" Line numbering
+" Line numbering (relative)
 set number
+set relativenumber
 
 " Show command
 set showcmd
@@ -51,6 +71,21 @@ nnoremap k gk
 
 " Insert line above and below cursor
 let @p = 'ok'
+
+" Indent whole file
+let @i = 'ggVG='
+
+" Map CTRL-t to FZF
+nnoremap <C-t> <Esc>:FZF<CR>
+
+" Map CTRL-\ to NERDTreeToggle
+nnoremap <C-\> <Esc>:NERDTreeToggle<CR>
+
+" Switch between different windows by their direction
+no <C-j> <C-w>j| "switching to below window 
+no <C-k> <C-w>k| "switching to above window
+no <C-l> <C-w>l| "switching to right window 
+no <C-h> <C-w>h| "switching to left window
 
 " Always try to show a paragraph’s last line
 set display+=lastline
@@ -96,30 +131,12 @@ set lazyredraw
 " If this many ms goes by and nothing is typed, the file will be saved to swap
 set updatetime=500
 
-" Plugins will be downloaded under the specified directory.
-call plug#begin('~/.vim/plugged')
-
-" Better JavaScript syntax highlighting
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'pangloss/vim-javascript'
-Plug 'mustache/vim-mustache-handlebars'
-
-" List ends here. Plugins become visible to Vim after this call.
-call plug#end()
-
-" NerdTree - Switch between different windows by their direction
-no <C-j> <C-w>j| "switching to below window 
-no <C-k> <C-w>k| "switching to above window
-no <C-l> <C-w>l| "switching to right window 
-no <C-h> <C-w>h| "switching to left window
-
 " Automatically start NERDTree when starting Vim
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 
 " Allow opening of directories using the Vim command line command
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | wincmd p | ene | exe 'NERDTree' argv()[0] | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | wincmd p | ene | exe 'NERDTree' argv()[0] | endif
 
 " Close NERDTree if only one window is left open
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -132,3 +149,52 @@ hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white
 :hi TabLine ctermfg=6 ctermbg=11
 :hi Title ctermfg=4
 :hi TabLineSel ctermfg=4 ctermbg=0
+
+" Change color of relative cursor line
+:hi CursorLineNr ctermbg=0 ctermfg=3
+
+" Vim Airline config
+let g:airline_theme='angr'
+
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = 'Ɇ'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ' '
+let g:airline_left_alt_sep = ' '
+let g:airline_right_sep = ' '
+let g:airline_right_alt_sep = ' '
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.dirty='⚡'
+
+" gitgutter 100ms update time
+set updatetime=100
+
+" gitgutter change highlight colors
+highlight GitGutterAdd ctermfg=2 ctermbg=0
+highlight GitGutterChange ctermfg=4 ctermbg=0
+highlight GitGutterDelete ctermfg=1 ctermbg=0
