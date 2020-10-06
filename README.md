@@ -9,3 +9,5 @@ nvim is important for some functionality in my dotfiles, for example, a windowed
 ## Terminal: iTerm2 with zsh
 I'm using zsh on iTerm2. I don't really use many of its features, but that might change soon. For now, I just use tmux for window and tile management.
 
+## Color schemes
+As you can probably guess, I really loved the Sublime Text color scheme so I am using it for my iTerm2 and my vim/nvim color scheme.
