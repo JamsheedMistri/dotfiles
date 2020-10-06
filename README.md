@@ -6,3 +6,6 @@ I use nvim for everything text and code related. For Java projects, I use Intell
 
 nvim is important for some functionality in my dotfiles, for example, a windowed fuzzy finder that is similar to that of Sublime Text.
 
+## Terminal: iTerm2 with zsh
+I'm using zsh on iTerm2. I don't really use many of its features, but that might change soon. For now, I just use tmux for window and tile management.
+
