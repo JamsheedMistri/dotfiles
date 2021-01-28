@@ -14,6 +14,15 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'w0rp/ale'
+Plug 'mileszs/ack.vim'
+if has('nvim')
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+	Plug 'Shougo/deoplete.nvim'
+	Plug 'roxma/nvim-yarp'
+	Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -22,6 +31,12 @@ call plug#end()
 syntax on
 set background=dark
 color base16-material-dark
+
+" .tsx files should be syntax highlighted like TypeScript
+augroup SyntaxSettings
+	autocmd!
+	autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+augroup END
 
 " Tab width
 set tabstop=4
@@ -81,6 +96,9 @@ nnoremap <C-t> <Esc>:FZF<CR>
 
 " Map CTRL-\ to NERDTreeToggle
 nnoremap <C-\> <Esc>:NERDTreeToggle<CR>
+
+" Map CTRL-\ to NERDTreeToggle
+nnoremap <C-f> <Esc>:Ack! 
 
 " Switch between different windows by their direction
 no <C-j> <C-w>j
@@ -196,3 +214,37 @@ set updatetime=100
 highlight GitGutterAdd ctermfg=2 ctermbg=0
 highlight GitGutterChange ctermfg=4 ctermbg=0
 highlight GitGutterDelete ctermfg=1 ctermbg=0
+
+" ESLint and Prettier config
+let g:ale_fixers = {
+ \ 'javascript': ['eslint', 'prettier']
+ \ }
+
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+
+let g:ale_sign_error = 'x'
+let g:ale_fix_on_save = 1
+let g:airline#extensions#ale#enabled = 1
+
+" ack
+if executable('ag')
+	let g:ackprg = 'ag --vimgrep'
+endif
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_camel_case = 1
+
+" tab completion
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" hit enter to select current option
+inoremap <expr><CR>  pumvisible() ? deoplete#close_popup() : "\<CR>"
+
+function g:Multiple_cursors_before()
+	call deoplete#custom#buffer_option('auto_complete', v:false)
+endfunction
+function g:Multiple_cursors_after()
+	call deoplete#custom#buffer_option('auto_complete', v:true)
+endfunction
