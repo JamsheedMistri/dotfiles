@@ -17,6 +17,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'w0rp/ale'
 Plug 'mileszs/ack.vim'
 Plug 'cohama/lexima.vim'
+Plug 'alvan/vim-closetag'
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -248,3 +249,7 @@ endfunction
 function g:Multiple_cursors_after()
 	call deoplete#custom#buffer_option('auto_complete', v:true)
 endfunction
+
+" closetag config
+let g:closetag_filetypes = 'html,xhtml,jsx,javascript'
+let g:closetag_emptyTags_caseSensitive = 1
